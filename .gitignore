@@ -38,3 +38,6 @@ env/
 *.pdf
 *.csv
 *.json
+
+# Output directory
+outputs/

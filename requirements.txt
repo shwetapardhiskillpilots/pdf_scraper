@@ -1,3 +1,6 @@
 pdfplumber
 pandas
 openpyxl
+gradio
+thefuzz
+python-Levenshtein
