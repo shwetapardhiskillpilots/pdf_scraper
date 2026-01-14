@@ -1,6 +1,9 @@
 pdfplumber
+fastapi
+uvicorn
+python-multipart
 pandas
 openpyxl
-gradio
 thefuzz
 python-Levenshtein
+requests
