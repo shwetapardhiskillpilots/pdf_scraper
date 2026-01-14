@@ -87,7 +87,15 @@ async def list_banks():
         for filename in os.listdir(layouts_dir):
             if filename.endswith(".py") and not filename.startswith("__"):
                 bank_key = filename[:-3]
-                friendly_name = bank_key.replace("_", " ").title()
+                
+                # Try to load the module to get FRIENDLY_NAME
+                try:
+                    import importlib
+                    module = importlib.import_module(f"app.bank_layouts.{bank_key}")
+                    friendly_name = getattr(module, "FRIENDLY_NAME", bank_key.replace("_", " ").title())
+                except Exception:
+                    friendly_name = bank_key.replace("_", " ").title()
+                    
                 banks.append({"key": bank_key, "name": friendly_name})
     
     return {"banks": banks}
