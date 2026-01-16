@@ -3,6 +3,8 @@ import re
 # Layout configuration for Union Bank Statements
 # Defined based on coordinate extraction from PDF layout analysis.
 
+FRIENDLY_NAME = "Union Bank"
+
 COLUMNS = {
     "Date": (0, 100),
     "Remarks": (100, 198),

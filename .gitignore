@@ -1,4 +1,4 @@
-# Python
+# Python artifacts
 __pycache__/
 *.py[cod]
 *$py.class
@@ -22,22 +22,30 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Virtual Environment
+# Environment and secrets
+.env
 .venv/
 venv/
 ENV/
 env/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# VS Code
+# IDEs
 .vscode/
+.idea/
+*.swp
+*.swo
 
-# Data Files (Sensitive)
+# Project specific
+uploads/
+outputs/
 *.pdf
 *.csv
 *.json
+!app/bank_layouts/*.json  # Keep layouts if they were json, but currently they are .py
 
-# Output directory
-outputs/
+# Tools
+.gemini/
+.agent/
+.ipynb_checkpoints
+ 
+ 

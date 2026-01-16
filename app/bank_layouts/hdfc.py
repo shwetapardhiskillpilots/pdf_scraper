@@ -3,6 +3,8 @@ import re
 # Layout configuration for HDFC Bank Statements
 # Defined based on coordinate extraction from PDF layout analysis.
 
+FRIENDLY_NAME = "HDFC"
+
 COLUMNS = {
     # X-coordinates for column boundaries
     "Date": (0, 68),             
