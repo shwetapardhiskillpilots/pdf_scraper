@@ -31,7 +31,7 @@ NORMALIZATION_MAP = {
     "Narration": "Narration",
     "Chq./Ref.No.": "Chq./Ref.No.",
     "ValueDt": "ValueDt",
-    "WithdrawalAmt": "Withdraw",
+    "WithdrawalAmt": "Withdrawal",
     "DepositAmt": "Deposit",
     "ClosingBalance": "ClosingBalance"
 }

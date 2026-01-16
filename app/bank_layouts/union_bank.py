@@ -33,7 +33,7 @@ NORMALIZATION_MAP = {
     "Tran Id-1": "Tran Id-1",
     "Instr. ID": "Instr. ID",
     "UTR Number": "UTR Number",
-    "Withdrawals": "Withdraw",
+    "Withdrawals": "Withdrawal",
     "Deposits": "Deposit",
     "Balance": "balance"
 }
@@ -69,8 +69,9 @@ def clean_data(cat, val):
             val = re.sub(pattern, w, val, flags=re.I)
             
         # Join alphanumeric IDs split across lines
-        val = re.sub(r'([A-Z0-9]{3,})\s+([A-Z0-9]{8,})', r'\1\2', val)
-        val = re.sub(r'([A-Z0-9]{8,})\s+([A-Z0-9]{3,})', r'\1\2', val)
+        # Heuristic: First part must end with a digit to avoid merging names (like STYLEMONK) with IDs
+        val = re.sub(r'([A-Z0-9]{3,}[0-9])\s+([A-Z0-9]{8,})', r'\1\2', val)
+        val = re.sub(r'([A-Z0-9]{8,}[0-9])\s+([A-Z0-9]{3,})', r'\1\2', val)
 
         # Fix known OCR misreads
         val = val.replace("ULTISTATECOOP", "MULTISTATE COOP")
@@ -145,8 +146,10 @@ def post_process_record(record):
         sender_val_clean = re.sub(r'\s+', '', sender_val)
         utr = f"Sender No: {sender_val_clean}"
         # Clean it from other fields
-        tran_id = tran_id.replace(full_found, "").strip()
+        # Remove the full match from Remarks to be safe, but also specifically the ID if it was part of the messy merge
         remarks = remarks.replace(full_found, "").strip()
+        remarks = remarks.replace(sender_val, "").strip() # Explicitly remove the ID part if 'Sender No' label was separated or lost
+        tran_id = tran_id.replace(full_found, "").strip()
 
     # Final Cleanup
     tran_id = re.sub(r'\s+', '', tran_id)
